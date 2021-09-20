@@ -36,7 +36,13 @@ class BooksApp extends React.Component {
     const searchStr = event.target.value.trim();
     if(searchStr.length){
       BooksAPI.search(searchStr).then((result)=>{
-        this.setState({filtered:result.error?[]:result})
+        ////////////////// Check book shelf on serach page /////////////////
+        const searchedBooks = result.error?[]:result.map((searchedBook) => {
+          const myBook = this.state.books.filter((myBook) => (myBook.id === searchedBook.id))[0]
+          searchedBook.shelf = myBook ? myBook.shelf : "none"
+          return searchedBook})
+        ///////////////////////////////////
+        this.setState({filtered:searchedBooks})
       });
     }else{
       this.setState({filtered:[]})
