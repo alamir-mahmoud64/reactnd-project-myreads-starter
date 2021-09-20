@@ -3,6 +3,7 @@ import Book from "./Book";
 import { Link } from "react-router-dom";
 
 function Search(props){
+   const {books,searchAction,changeShelf}=props;
     return <div className="search-books">
       <div className="search-books-bar">
         <Link className="close-search" to="/">Close</Link>
@@ -15,15 +16,15 @@ function Search(props){
             However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
             you don't find a specific author or title. Every search is limited by search terms.
           */}
-          <input type="text" placeholder="Search by title or author" onChange={props.searchAction} />
+          <input type="text" placeholder="Search by title or author" onChange={searchAction} />
 
         </div>
       </div>
       <div className="search-books-results">
         <ol className="books-grid">
-          {props.books.map((book)=>(
+          {books.map((book)=>(
             <li key={book.id}>
-                <Book book={book} changeShelf={props.changeShelf} />
+                <Book book={book} changeShelf={changeShelf} />
             </li>
           ))}
         </ol>

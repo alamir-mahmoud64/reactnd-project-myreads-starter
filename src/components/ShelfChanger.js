@@ -1,10 +1,11 @@
 import React from "react";
 
 function ShelfChanger(props){
+ const {book,changeShelf}=props;
     return <div className="book-shelf-changer">
-        <select defaultValue={props.book.shelf?props.book.shelf:'none'} onChange={(event)=>{
+        <select defaultValue={book.shelf?book.shelf:'none'} onChange={(event)=>{
           const newShelf = event.target.value;
-          props.changeShelf(props.book,newShelf);
+          changeShelf(book,newShelf);
         }}>
           <option value="move" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
